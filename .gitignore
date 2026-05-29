@@ -1,27 +1,46 @@
-# Logs
-logs
+# ==============================================================================
+# Btc-Arbitrage-Bot - Root Git Ignore Config (Estándar Profesional)
+# ==============================================================================
+
+# 1. Dependencias de Node.js (Aplicado recursivamente a cualquier subcarpeta)
+**/node_modules/
+node_modules/
+
+# 2. Artefactos de Compilación y Distribución
+**/dist/
+**/dist-ssr/
+**/.prod/
+build/
+
+# 3. Entornos Locales y Secretos (Variables de Entorno, API Keys simuladas)
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.*
+
+# 4. Logs de Ejecución y Diagnóstico (Críticos para el backend de arbitraje)
+**/logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+**/npm-debug.log*
+**/yarn-debug.log*
+**/pnpm-debug.log*
+**/lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# 5. Directorios de Editores e IDEs (Limpieza del Workspace)
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.DS_Store
+Thumbs.db
 
-# Private files
-private
+# 6. Archivos Privados, Metadatos Locales y Sandbox
+/private/
+**/*.metadata.json
+**/*.resolved
+**/*.resolved.*
