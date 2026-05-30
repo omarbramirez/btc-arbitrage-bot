@@ -87,6 +87,7 @@ export interface WalletBalance {
 export interface WalletState {
   binance: WalletBalance;
   kraken: WalletBalance;
+  coinbase: WalletBalance;
 }
 
 // ─── Bot Configuration ─────────────────────────────────────────────────────
@@ -174,13 +175,13 @@ export interface ConnectionStatus {
 }
 
 // ─── Typed outbound WS payloads ────────────────────────────────────────────
-export type OrderBookUpdateMsg   = WsMessage<OrderBook>;
-export type OpportunityMsg       = WsMessage<ArbitrageOpportunity>;
-export type WalletUpdateMsg      = WsMessage<WalletState>;
-export type MetricsUpdateMsg     = WsMessage<PerformanceMetrics>;
-export type CircuitBreakerMsg    = WsMessage<CircuitBreakerState>;
-export type ConnectionStatusMsg  = WsMessage<ConnectionStatus>;
-export type LogEntryMsg          = WsMessage<LogEntry>;
+export type OrderBookUpdateMsg = WsMessage<OrderBook>;
+export type OpportunityMsg = WsMessage<ArbitrageOpportunity>;
+export type WalletUpdateMsg = WsMessage<WalletState>;
+export type MetricsUpdateMsg = WsMessage<PerformanceMetrics>;
+export type CircuitBreakerMsg = WsMessage<CircuitBreakerState>;
+export type ConnectionStatusMsg = WsMessage<ConnectionStatus>;
+export type LogEntryMsg = WsMessage<LogEntry>;
 
 export type AnyWsMessage =
   | OrderBookUpdateMsg

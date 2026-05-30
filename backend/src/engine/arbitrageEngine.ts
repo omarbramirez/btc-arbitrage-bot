@@ -25,7 +25,8 @@ export const EXCHANGE_FEES: Record<ExchangeId, number> = {
 
 const INITIAL_WALLET: WalletState = {
   binance: { exchange: 'binance', usdt: 10_000, btc: 0.5 },
-  kraken:  { exchange: 'kraken',  usdt: 10_000, btc: 0.5 },
+  kraken: { exchange: 'kraken', usdt: 10_000, btc: 0.5 },
+  coinbase: { exchange: 'coinbase', usdt: 10_000, btc: 0.5 }
 };
 
 /**
@@ -159,7 +160,7 @@ export class ArbitrageEngine {
       return;
     }
 
-    const buyFeeRate  = EXCHANGE_FEES[buyExchange];
+    const buyFeeRate = EXCHANGE_FEES[buyExchange];
     const sellFeeRate = EXCHANGE_FEES[sellExchange];
 
     const { buyFeeUsd, sellFeeUsd, netProfitUsd, netProfitPct } = calcNetProfit(
@@ -221,7 +222,7 @@ export class ArbitrageEngine {
     }
 
     // Check wallet balance
-    const buyWallet  = this.wallet[buyExchange];
+    const buyWallet = this.wallet[buyExchange];
     const sellWallet = this.wallet[sellExchange];
     const requiredUsdt = buySlip.weightedAvgPrice * filledVolumeBtc * (1 + buyFeeRate);
 
@@ -254,16 +255,16 @@ export class ArbitrageEngine {
   ): void {
     const { buyExchange, sellExchange, filledVolumeBtc, effectiveBuyPrice, buyFeeUsd, sellFeeUsd, netProfitUsd } = opp;
 
-    const buyWallet  = this.wallet[buyExchange];
+    const buyWallet = this.wallet[buyExchange];
     const sellWallet = this.wallet[sellExchange];
     const buyFeeRate = EXCHANGE_FEES[buyExchange];
 
     const totalBuyCost = effectiveBuyPrice * filledVolumeBtc * (1 + buyFeeRate);
 
     // Update wallets
-    buyWallet.usdt  -= totalBuyCost;
-    buyWallet.btc   += filledVolumeBtc;
-    sellWallet.btc  -= filledVolumeBtc;
+    buyWallet.usdt -= totalBuyCost;
+    buyWallet.btc += filledVolumeBtc;
+    sellWallet.btc -= filledVolumeBtc;
     sellWallet.usdt += (opp.effectiveSellPrice * filledVolumeBtc) - sellFeeUsd;
 
     opp.status = partial ? 'partial' : 'executed';
@@ -272,7 +273,7 @@ export class ArbitrageEngine {
     // Update metrics
     this.metrics.totalTrades++;
     this.metrics.totalProfitUsd += netProfitUsd;
-    this.metrics.totalFeesUsd   += buyFeeUsd + sellFeeUsd;
+    this.metrics.totalFeesUsd += buyFeeUsd + sellFeeUsd;
 
     if (netProfitUsd >= 0) {
       this.metrics.successfulTrades++;
