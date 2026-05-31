@@ -56,6 +56,7 @@ export interface WalletBalance {
 export interface WalletState {
   binance: WalletBalance;
   kraken: WalletBalance;
+  coinbase: WalletBalance;
 }
 
 export interface BotConfig {
